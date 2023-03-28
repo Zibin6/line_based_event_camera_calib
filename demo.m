@@ -4,7 +4,6 @@
 % This code follows the algorithm given by 
 % [1] "Line-based Event Camera Calibration"
 %
-% Zibin Liu, Banglei Guan, Yang Shang
 %
 % National University of Defense Technology, China
 
