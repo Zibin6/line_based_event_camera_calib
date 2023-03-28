@@ -4,20 +4,20 @@
 % This code follows the algorithm given by 
 % [1] "Line-based Event Camera Calibration"
 %
-% Zibin Liu, Banglei Guan, Yang Shang
+%
 %
 % This work was developed at National University of Defense Technology, 
 % Hunan Provincial Key Laboratory of Image Measurement and Vision Navigation.
 
 clc;clear;
 close all
-addpath(genpath("./func/"));
+addpath(genpath("../func/"));
  
 noise=1;
 num=50;
 w=0:2:10;
 A=zeros(size(w));
-
+iter_num=1000;
 %......
 name= {'planar-R','nonplanar-R','planar-T','nonplanar-T','planar-fx','nonplanar-fx','planar-fy','nonplanar-fy',...
     'planar-cx','nonplanar-cx','planar-cy','nonplanar-cy','planar-k1','nonplanar-k1','planar-k2','nonplanar-k2'};
@@ -35,7 +35,7 @@ A, 'median_cx', A,'median_cy', A, 'median_k1', A,'median_k2', A,...
 
 for i= 1:length(w)
 
-    for j=1:500
+    for j=1:iter_num
  
     [P_p,P_n,p,pt,K,R,t] = gendata_w(noise,num,w(i)/100);
 
@@ -80,7 +80,7 @@ for i= 1:length(w)
 end
 
 
-subplot(1,3,1)
+subplot(1,4,1)
 
 yyaxis left;
 plot(w,method_list(1).('median_r'),'marker',method_list(1).marker,...
@@ -111,51 +111,85 @@ ylabel('Translation Error (%)','FontSize',18);
 ylim([0 5]);
 xlim(w([1 end]));
 
-
 set(gca,'xtick',w,'FontSize',14);
 title('Rotation and Translation error','FontSize',18,'FontName','Time New Roman');
 xlabel('Measurement Error (%)','FontSize',18);
 % ylabel('Rotation Error (degrees)','FontSize',12);
 legend('planar-R', 'nonplanar-R','planar-T', 'nonplanar-T');
 
-subplot(1,3,2)
+subplot(1,4,2)
 yyaxis left;
-plot(w,0.5*(method_list(5).('median_fx')+method_list(7).('median_fy')),'marker',method_list(5).marker,...
+plot(w,method_list(5).('median_fx'),'marker',method_list(5).marker,...
         'color',method_list(5).color,...
         'markerfacecolor',method_list(5).markerfacecolor,...
         'displayname',method_list(5).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(5).linestyle);hold on;
-plot(w,0.5*(method_list(6).('median_fx')+method_list(8).('median_fy')),'marker',method_list(6).marker,...
+plot(w,(method_list(6).('median_fx')),'marker',method_list(6).marker,...
         'color',method_list(6).color,...
         'markerfacecolor',method_list(6).markerfacecolor,...
         'displayname',method_list(6).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(6).linestyle);hold on;
-ylabel('Focal length Error (%)','FontSize',18);
-ylim([0 2]);
+ylabel('f_x Error (%)','FontSize',18);
+ylim([0 5]);
 
 yyaxis right;
-plot(w,0.5*(method_list(9).('median_cx')+method_list(11).('median_cx')),'marker',method_list(7).marker,...
+plot(w,method_list(7).('median_fy'),'marker',method_list(7).marker,...
         'color',method_list(7).color,...
         'markerfacecolor',method_list(7).markerfacecolor,...
         'displayname',method_list(7).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(7).linestyle);hold on;
-plot(w,0.5*(method_list(10).('median_cy')+method_list(12).('median_cy')),'marker',method_list(8).marker,...
+plot(w,method_list(8).('median_fy'),'marker',method_list(8).marker,...
         'color',method_list(8).color,...
         'markerfacecolor',method_list(8).markerfacecolor,...
         'displayname',method_list(8).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(8).linestyle);
-ylabel('Principal point Error (%)','FontSize',18);
-ylim([0 2]);
+ylabel('f_y Error (%)','FontSize',18);
+ylim([0 5]);
 xlim(w([1 end]));
 
-
 set(gca,'xtick',w,'FontSize',14);
-title('Intrinsic Parameter error','FontSize',18,'FontName','Time New Roman');
+title('Focal length error','FontSize',18,'FontName','Time New Roman');
 xlabel('Measurement Error (%)','FontSize',18);
 
-legend('planar-f', 'nonplanar-f','planar-c', 'nonplanar-c');
+legend('planar-f_x', 'nonplanar-f_x','planar-f_y', 'nonplanar-f_y');
 
-subplot(1,3,3)
+subplot(1,4,3)
+yyaxis left;
+plot(w,method_list(9).('median_cx'),'marker',method_list(5).marker,...
+        'color',method_list(5).color,...
+        'markerfacecolor',method_list(5).markerfacecolor,...
+        'displayname',method_list(5).name, ...
+        'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(5).linestyle);hold on;
+plot(w,method_list(10).('median_cx'),'marker',method_list(6).marker,...
+        'color',method_list(6).color,...
+        'markerfacecolor',method_list(6).markerfacecolor,...
+        'displayname',method_list(6).name, ...
+        'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(6).linestyle);hold on;
+ylabel('c_x Error (%)','FontSize',18);
+ylim([0 5]);
+
+yyaxis right;
+plot(w,method_list(11).('median_cy'),'marker',method_list(7).marker,...
+        'color',method_list(7).color,...
+        'markerfacecolor',method_list(7).markerfacecolor,...
+        'displayname',method_list(7).name, ...
+        'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(7).linestyle);hold on;
+plot(w,method_list(12).('median_cy'),'marker',method_list(8).marker,...
+        'color',method_list(8).color,...
+        'markerfacecolor',method_list(8).markerfacecolor,...
+        'displayname',method_list(8).name, ...
+        'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(8).linestyle);
+ylabel('c_y Error (%)','FontSize',18);
+ylim([0 5]);
+xlim(w([1 end]));
+
+set(gca,'xtick',w,'FontSize',14);
+title('Principal point error','FontSize',18,'FontName','Time New Roman');
+xlabel('Measurement Error (%)','FontSize',18);
+
+legend('planar-c_x', 'nonplanar-c_x','planar-c_y', 'nonplanar-c_y');
+
+subplot(1,4,4)
 yyaxis left;
 plot(w,method_list(13).('median_k1'),'marker',method_list(13).marker,...
         'color',method_list(13).color,...
@@ -167,7 +201,7 @@ plot(w,method_list(14).('median_k1'),'marker',method_list(14).marker,...
         'markerfacecolor',method_list(14).markerfacecolor,...
         'displayname',method_list(14).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(14).linestyle);hold on;
-ylabel('k1 Error','FontSize',18);
+ylabel('k_1 Error','FontSize',18);
 ylim([0 0.05]);
 
 yyaxis right;
@@ -181,7 +215,7 @@ plot(w,method_list(16).('median_k2'),'marker',method_list(16).marker,...
         'markerfacecolor',method_list(16).markerfacecolor,...
         'displayname',method_list(16).name, ...
         'LineWidth',2,'MarkerSize',8,'LineStyle',method_list(16).linestyle);
-ylabel('k2 Error','FontSize',18);
+ylabel('k_2 Error','FontSize',18);
 ylim([0 0.05]);
 xlim(w([1 end]));
 
@@ -189,4 +223,4 @@ set(gca,'xtick',w,'FontSize',14);
 title('Distortion error','FontSize',18,'FontName','Time New Roman');
 xlabel('Measurement Error (%)','FontSize',18);
 
-legend('planar-k1', 'nonplanar-k1','planar-k2', 'nonplanar-k2');
+legend('planar-k_1', 'nonplanar-k_1','planar-k_2', 'nonplanar-k_2');
