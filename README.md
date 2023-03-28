@@ -9,7 +9,7 @@ Details of the algorithm can be found in our paper:
 
 "Line-based Event Camera Calibration"
 
-Zibin Liu, Banglei Guan, Yang Shang.
+Zibin Liu, Banglei Guan, Yang Shang, Zhenbao Yu, and Qifeng Yu.
 
 2022
 
@@ -17,6 +17,7 @@ Zibin Liu, Banglei Guan, Yang Shang.
 ## Main Function
 
 
+Simulation test of random data can be found in 
 
 ```
 demo.m               : algorithm testing
@@ -27,11 +28,17 @@ w_test_both.m        : accuracy w.r.t varying measurement error of angular and l
 
 ```
 
+Real-world test of DAVIS346 calibration can be found in 
 
+```
+test_paper.m    : DAVIS346 calibration using a paper
+test_box.m      : DAVIS346 calibration using a box
+
+```
 
 ## Contact
 
-Please contact Zibin Liu <liuzibin19@nudt.edu.cn> or any of the other authors for requests.
+Please contact the authors for requests.
 
 This work was developed at National University of Defense Technology, 
 Hunan Provincial Key Laboratory of Image Measurement and Vision Navigation.
