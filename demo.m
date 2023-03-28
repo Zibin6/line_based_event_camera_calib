@@ -4,11 +4,12 @@
 % This code follows the algorithm given by 
 % [1] "Line-based Event Camera Calibration"
 %
+% 
 %
 % National University of Defense Technology, China
 
 clc;clear;
-addpath(genpath("./func/"));
+addpath(genpath("../func/"));
 
 %% Planar_teat
 
