@@ -9,7 +9,7 @@ Details of the algorithm can be found in our paper:
 
 "LECalib: Line-based Event Camera Calibration"
 
-Zibin Liu, Banglei Guan, Yang Shang, Zhenbao Yu, and Qifeng Yu.
+Zibin Liu, Banglei Guan, Yang Shang, Zhenbao Yu, Yifei Bian and Qifeng Yu.
 
 2024
 
