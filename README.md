@@ -31,7 +31,6 @@ w_test_both.m        : accuracy w.r.t varying measurement error of angular and l
 Real-world test of DAVIS346 calibration can be found in 
 
 ```
-test_paper.m    : DAVIS346 calibration using a paper
 test_box.m      : DAVIS346 calibration using a box
 
 ```
