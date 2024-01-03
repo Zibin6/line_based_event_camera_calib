@@ -7,11 +7,11 @@ This repository contains the key code of our line_based event camera calibration
 
 Details of the algorithm can be found in our paper:
 
-"Line-based Event Camera Calibration"
+"LECalib: Line-based Event Camera Calibration"
 
 Zibin Liu, Banglei Guan, Yang Shang, Zhenbao Yu, and Qifeng Yu.
 
-2023
+2024
 
 
 ## Main Function
