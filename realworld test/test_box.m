@@ -2,7 +2,7 @@
 %
 %
 % This code follows the algorithm given by 
-% [1] "Line-based Event Camera Calibration"
+% [1] "LECalib: Line-based Event Camera Calibration"
 %
 % 
 %
