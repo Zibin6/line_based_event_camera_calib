@@ -33,11 +33,8 @@ journal = {Measurement},
 volume = {235},
 pages = {114900},
 year = {2024},
-issn = {0263-2241},
 doi = {https://doi.org/10.1016/j.measurement.2024.114900},
-url = {https://www.sciencedirect.com/science/article/pii/S0263224124007851},
-author = {Zibin Liu and Banglei Guan and Yang Shang and Zhenbao Yu and Yifei Bian and Qifeng Yu},
-keywords = {Camera calibration, Event camera, Line detection}}
+author = {Zibin Liu and Banglei Guan and Yang Shang and Zhenbao Yu and Yifei Bian and Qifeng Yu}}
 
 
 ## Contact
